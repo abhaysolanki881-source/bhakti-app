@@ -237,6 +237,10 @@ object AdMobManager {
     }
 
     fun showAppOpenAdIfAvailable(activity: Activity, onComplete: () -> Unit) {
+        if (activity.isFinishing || activity.isDestroyed) {
+            onComplete()
+            return
+        }
         if (isSacredSessionActive()) {
             Log.d(TAG, "Sacred devotional session active; suppressing App Open ad")
             onComplete()
@@ -308,7 +312,7 @@ object AdMobManager {
      * Respects 35s cooldown, never blocks navigation, and never interrupts sacred audio/Jap Mala.
      */
     fun showInterstitialAd(activity: Activity?, onComplete: () -> Unit) {
-        if (activity == null) {
+        if (activity == null || activity.isFinishing || activity.isDestroyed) {
             onComplete()
             return
         }
@@ -432,7 +436,7 @@ object AdMobManager {
         onUnlocked: () -> Unit,
         onDismissedWithoutReward: (reason: String) -> Unit
     ) {
-        if (activity == null) {
+        if (activity == null || activity.isFinishing || activity.isDestroyed) {
             mainHandler.post { onDismissedWithoutReward(AppStrings.bonusAudioAdUnavailable(lang)) }
             return
         }
@@ -494,7 +498,7 @@ object AdMobManager {
         onBonusGranted: () -> Unit,
         onDismissedWithoutReward: (reason: String) -> Unit
     ) {
-        if (activity == null) {
+        if (activity == null || activity.isFinishing || activity.isDestroyed) {
             mainHandler.post { onDismissedWithoutReward(AppStrings.bonusAudioAdUnavailable(lang)) }
             return
         }
@@ -550,7 +554,7 @@ object AdMobManager {
         onUnlocked: () -> Unit,
         onDismissedWithoutReward: (reason: String) -> Unit
     ) {
-        if (activity == null) {
+        if (activity == null || activity.isFinishing || activity.isDestroyed) {
             mainHandler.post { onDismissedWithoutReward(AppStrings.bonusAudioAdUnavailable(lang)) }
             return
         }
