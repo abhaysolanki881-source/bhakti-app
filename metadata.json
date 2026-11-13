@@ -1,0 +1,6 @@
+{
+  "name": "Bhakti Sagar",
+  "description": "ભક્તિ સાગર - તમારા મોબાઇલમાં એક ડિજિટલ મંદિર (Daily Darshan, Aarti, Bhajan, Gita, Panchang & Jap Mala)",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
